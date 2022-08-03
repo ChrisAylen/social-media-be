@@ -2,20 +2,27 @@
 GET http://localhost:3000/api/users
 
 ###Get User by Id
-GET http://localhost:3000/api/users/1
+GET http://localhost:3000/api/users/62e91e30f3a93b2ad9042049
 
 ###Create User
 POST http://localhost:3000/api/users
+Content-Type: application/json
 
-{
+{     
         "username": "John",
         "email": "john@test.com"
-}
+        }
 
 ###Update User
-PUT http://localhost:3000/api/users/1
+PATCH http://localhost:3000/api/users/62e91e30f3a93b2ad9042049
+Content-Type: application/json
 
+{     
+        "username": "JohnSmithSmithSmith",
+        "email": "johnsmith@testtest.com"
+ }
+ 
 ###Delete User
-DELETE http://localhost:3000/api/users/1
+DELETE http://localhost:3000/api/users/62e8e72bc4d0a29b04708201
 
 

@@ -15,8 +15,16 @@ router.get('/', async (req, res) => {
 );
 
 //getUserById
-router.get('/:id', (req, res) => {
-    res.send('Get user by id:' + req.params.id);
+router.get('/:id', async (req, res) => {
+    try {
+        const user = await User.findById(req.params.id);
+        res.json(user);
+    }
+    catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+    
+    //res.send('Get user by id:' + req.params.id);
 }
 );
 
@@ -39,36 +47,37 @@ router.post('/', async (req, res) => {
 
 
 //updateUser
-router.put('/:id', (req, res) => {
-    res.send('Update user by id:' + req.params.id);
+router.patch('/:id', async (req, res) => {
+
+    try {
+
+        const user = await User.findOneAndUpdate(
+            { _id: req.params.id },
+            { $set: req.body },
+            { runValidators: true, new: true, returnOriginal: false }
+        );
+        res.json(user);
+    }
+    catch (err) {
+        res.status(500).json({ message: err.message });
+    }
 }
 );
+
 
 //deleteUser
-router.delete('/:id', (req, res) => {
-    res.send('Delete user by id' + req.params.id);
+router.delete('/:id', async (req, res) => {
+    try {
+        const removedUser = await User.deleteOne({ _id: req.params.id });
+        res.json(removedUser);
+    }
+    catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+
+
 }
 );
-
-
-
-// const {
-//     getallUsers,
-//     getUser,
-//     createUser,
-//     //updateUser,
-//     //deleteUser,
-
-
-// } = require('../../controllers/usersController');
-
-// const {addfriends, deletefriends} = require('../../controllers/friendsController');
-
-// router.route('/').get(getallUsers).post(createUser);
-// router.route('/:userId').get(getUser).delete(deleteUser).put(updateUser);
-// //router.route('/addfriend/:userId').post(addfriends);
-// //router.route('/:userId/deletefriend/:deletefriendsId').delete(deletefriends);
-
 
 
 module.exports = router;
