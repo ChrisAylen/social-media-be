@@ -9,8 +9,8 @@ POST http://localhost:3000/api/users
 Content-Type: application/json
 
 {     
-        "username": "John",
-        "email": "john@test.com"
+        "username": "Chris",
+        "email": "Chris@test.com"
         }
 
 ###Update User
