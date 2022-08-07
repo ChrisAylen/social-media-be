@@ -9,9 +9,9 @@ POST http://localhost:3000/api/users
 Content-Type: application/json
 
 {     
-        "username": "Chris",
-        "email": "Chris@test.com"
-        }
+        "username": "ChrisChris",
+        "email": "Chris3@test.com"
+}
 
 ###Update User
 PATCH http://localhost:3000/api/users/62e91e30f3a93b2ad9042049
@@ -23,6 +23,24 @@ Content-Type: application/json
  }
  
 ###Delete User
-DELETE http://localhost:3000/api/users/62e8e72bc4d0a29b04708201
+DELETE http://localhost:3000/api/users/62ee2073f38bd3842c43a962
 
 
+###Get All Thoughts
+
+GET http://localhost:3000/api/thoughts
+
+### Create a Thought
+
+POST http://localhost:3000/api/thoughts
+Content-Type: application/json
+
+{     
+        "thoughtText": "This is a test thought",
+        "user_Id": "62ee2073f38bd3842c43a962"
+}
+
+
+### create a duff route
+
+Get http://localhost:3000/api/duff

@@ -1,4 +1,12 @@
+const express = require('express');
+const router = require('express').Router();
+//const Thought = require('../../models/Thought');
+const {Thought, User } = require('../../models/');
+
+
 //Get all thoughts
+
+
 router.get('/', async (req, res) => {
     try {
         const thoughts = await Thought.find();
@@ -23,24 +31,36 @@ router.get('/:id', async (req, res) => {
     }
 }
 );
-
-//post to create a new thought
+// Create a new thought on a user
 router.post('/', async (req, res) => {
     const thought = new Thought({
         thoughtText: req.body.thoughtText,
-        createdAt: req.body.createdAt,
-        username: req.body.username,
-        reactions: req.body.reactions,
+        userName: req.body.userName,
     });
     try {
-        const newThought = await thought.save();
-        res.status(201).json(newThought);
+        User.findById(req.body.user_Id, (err, user) => {
+
+            if (err) {
+                res.status(500).json({ message: err.message });
+            }
+            else {
+                user.thoughts.push(thought);
+                user.save();
+                res.status(201).json(thought);
+            }
+
+        }
+        );
     }
     catch (err) {
         res.status(400).json({ message: err.message });
     }
-}
-);
+});
+
+
+
+
+
 
 //put to update a thought
 router.put('/:id', async (req, res) => {
@@ -55,8 +75,7 @@ router.put('/:id', async (req, res) => {
     catch (err) {
         res.status(500).json({ message: err.message });
     }
-}
-);
+});
 
 //Delete a thought
 router.delete('/:id', async (req, res) => {
@@ -102,4 +121,4 @@ router.delete('/:id/reactions/:reactionId', async (req, res) => {
 );
 //Get all reactions
 
-
+module.exports = router;

@@ -13,7 +13,9 @@ app.use(express.json());
 
 // Routes
 const userRoutes = require('./routes/api/userRoute');
+const thoughtRoutes = require('./routes/api/thoughtsRoutes');
 app.use('/api/users', userRoutes);
+app.use('/api/thoughts', thoughtRoutes);
 
 
 app.listen(3000, () => console.log('server is running on port 3000'));
