@@ -79,5 +79,35 @@ router.delete('/:id', async (req, res) => {
 }
 );
 
+// Add a friend to a user
+router.patch('/:id/friends/:friendId', async (req, res) => {
+    try {
+        const user = await User.findById(req.params.id);
+        user.friends.push(req.params.friendId);
+        await user.save();
+        res.json(user);
+    }
+    catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+}
+);
+
+
+// Remove a friend from a user  
+router.delete('/:id/friends/:friendId', async (req, res) => {
+    try {
+        const user = await User.findById(req.params.id);
+        user.friends.pull(req.params.friendId);
+        await user.save();
+        res.json(user);
+    }
+    catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+}
+);
+
+
 
 module.exports = router;

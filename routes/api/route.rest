@@ -65,6 +65,14 @@ Content-Type: application/json
                 "username": "Test3"
         }
 
+### Add a friend
+
+PATCH http://localhost:3000/api/users/62ef9740b4af24f78e2aee8f/friends/62ef9746b4af24f78e2aee91
+
+
+### Remove a friend
+
+DELETE http://localhost:3000/api/users/62ef9740b4af24f78e2aee8f/friends/62ef9746b4af24f78e2aee91
 
 ### create a duff route
 
