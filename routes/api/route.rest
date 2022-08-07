@@ -2,7 +2,7 @@
 GET http://localhost:3000/api/users
 
 ###Get User by Id
-GET http://localhost:3000/api/users/62e91e30f3a93b2ad9042049
+GET http://localhost:3000/api/users/62ef8f65caca05148c9f9f31
 
 ###Create User
 POST http://localhost:3000/api/users
@@ -37,7 +37,8 @@ Content-Type: application/json
 
 {     
         "thoughtText": "This is a test thought",
-        "user_Id": "62ee2073f38bd3842c43a962"
+        "user_Id": "62ef8f65caca05148c9f9f31",
+        "username": "ChrisChris"
 }
 
 

@@ -35,9 +35,11 @@ router.get('/:id', async (req, res) => {
 router.post('/', async (req, res) => {
     const thought = new Thought({
         thoughtText: req.body.thoughtText,
-        userName: req.body.userName,
+        username: req.body.username,
+        
     });
     try {
+        const newThought = await thought.save();
         User.findById(req.body.user_Id, (err, user) => {
 
             if (err) {
