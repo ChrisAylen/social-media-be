@@ -18,8 +18,6 @@ router.get('/', async (req, res) => {
 }
 );
 
-
-
 // Get a single thought by its id
 router.get('/:id', async (req, res) => {
     try {
@@ -59,11 +57,6 @@ router.post('/', async (req, res) => {
     }
 });
 
-
-
-
-
-
 //put to update a thought
 router.put('/:id', async (req, res) => {
     try {
@@ -90,15 +83,14 @@ router.delete('/:id', async (req, res) => {
     }
 }
 );
-//Create a reaction
-router.post('/:id/reactions', async (req, res) => {
+//Update a thought to add a reaction
+router.patch('/:id/reactions', async (req, res) => {
     try {
-        const thought = await Thought.findById(req.params.id);
-        const reaction = new Reaction({
-            reactionBody: req.body.reactionBody,
-            username: req.body.username,
-        });
-        thought.reactions.push(reaction);
+        const thought = await Thought.findOneAndUpdate(
+            { _id: req.params.id },
+            { $push: { reactions: req.body } },
+            { runValidators: true, new: true, returnOriginal: false }
+        );
         await thought.save();
         res.json(thought);
     }
@@ -107,6 +99,23 @@ router.post('/:id/reactions', async (req, res) => {
     }
 }
 );
+
+// router.post('/:id/reactions', async (req, res) => {
+//     try {
+//         const thought = await Thought.findById(req.params.id);
+//         const reaction = new Reaction({
+//             reactionBody: req.body.reactionText,
+//             username: req.body.username,
+//         });
+//         thought.reactions.push(reaction);
+//         await thought.save();
+//         res.json(thought);
+//     }
+//     catch (err) {
+//         res.status(500).json({ message: err.message });
+//     }
+// });
+
 //Delete a reaction
 router.delete('/:id/reactions/:reactionId', async (req, res) => {
     try {

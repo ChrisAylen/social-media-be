@@ -9,8 +9,8 @@ POST http://localhost:3000/api/users
 Content-Type: application/json
 
 {     
-        "username": "ChrisChris",
-        "email": "Chris3@test.com"
+        "username": "Test3",
+        "email": "Test3@test.com"
 }
 
 ###Update User
@@ -20,10 +20,10 @@ Content-Type: application/json
 {     
         "username": "JohnSmithSmithSmith",
         "email": "johnsmith@testtest.com"
- }
+}
  
 ###Delete User
-DELETE http://localhost:3000/api/users/62ee2073f38bd3842c43a962
+DELETE http://localhost:3000/api/users/62ea44977a5e5f66898d4f75
 
 
 ###Get All Thoughts
@@ -37,9 +37,33 @@ Content-Type: application/json
 
 {     
         "thoughtText": "This is a test thought",
-        "user_Id": "62ef8f65caca05148c9f9f31",
+        "user_Id": "62ea44977a5e5f66898d4f75",
         "username": "ChrisChris"
 }
+
+### Update a Thought
+PUT http://localhost:3000/api/thoughts/62ef9592aceffbe26e2d5e09
+Content-Type: application/json
+
+{     
+        "thoughtText": "This is a revised test thought",
+        "user_Id": "62ea44977a5e5f66898d4f75",
+        "username": "ChrisChris"
+}
+
+### delete a thought
+
+DELETE http://localhost:3000/api/thoughts/62ef9592aceffbe26e2d5e09
+
+
+### Create a reaction
+PATCH http://localhost:3000/api/thoughts/62ef9bac78a73e8cfe375fe8/reactions
+Content-Type: application/json
+
+        {
+                "reactionBody": "This is a test reaction",
+                "username": "Test3"
+        }
 
 
 ### create a duff route
