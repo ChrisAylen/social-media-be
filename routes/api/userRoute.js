@@ -23,8 +23,7 @@ router.get('/:id', async (req, res) => {
     catch (err) {
         res.status(500).json({ message: err.message });
     }
-    
-    //res.send('Get user by id:' + req.params.id);
+
 }
 );
 

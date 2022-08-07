@@ -3,7 +3,15 @@
 ![](https://img.shields.io/badge/license-MIT-blue.svg)
     
 ## Description
-    
+
+This is a simple social media RESTFul API.  It provides basic functionality for:
+
+1. Managing Users
+2. Managing friends
+3. Managing user thoughts
+4. Managing user reactions to thoughts
+
+It uses Node.Js and MongoDb.
 
 
 ## Table of Contents 
@@ -26,30 +34,45 @@
     
 'npm i' to install the necessary dependencies.
 
-Create a file named .env with the following contents:
+Create a file named .env with the following contents (This assumes you are using a default local MongoDb to host the application):
 
 ```
-DB_NAME=yourdbname
-DB_USER=yourdbuser
-DB_PASSWORD=yourdbpassword
-DB_HOST=yourdbhost
-DB_PORT=3306
-PORT=3001
+DATABASE_URL=mongodb://localhost:27017/
 ```
 
 ### Setting up the database
 
+#### Add a user
+```
+curl --request POST \
+  --url http://localhost:3000/api/users \
+  --header 'Content-Type: application/json' \
+  --data '{
+	"username":"Test1",
+	"email":"test1@test.com"
+}'
+```
+#### Add an associated thought
+Using the Id generated with the precious call:
+```
+curl --request POST \
+  --url http://localhost:3000/api/thoughts \
+  --header 'Content-Type: application/json' \
+  --data '{
+        "thoughtText": "This is a test thought for Test1 by Test2",
+        "user_Id": "[Your-New-USERID-Goes-HERE]",
+        "username": "Test1"
+}'
+```
 
 
 ## Usage
 
-
+Use the provided insomnia collection to use all the available routes
 
 ## API
 
 An insomnia collection can be found in this git repository
-
-### Curl Examples
 
 ## License
     
