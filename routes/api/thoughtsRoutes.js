@@ -73,6 +73,7 @@ router.put('/:id', async (req, res) => {
 });
 
 //Delete a thought
+//TODO: Delete the associated thought in the users array
 router.delete('/:id', async (req, res) => {
     try {
         const removedThought = await Thought.remove({ _id: req.params.id });
@@ -120,8 +121,15 @@ router.patch('/:id/reactions', async (req, res) => {
 router.delete('/:id/reactions/:reactionId', async (req, res) => {
     try {
         const thought = await Thought.findById(req.params.id);
+        console.log(thought);
         const reaction = thought.reactions.id(req.params.reactionId);
-        reaction.remove();
+        console.log(reaction);
+        try{
+            reaction.remove();
+        } catch (err) {
+            res.status(400).json({ message: "No reaction with that Id was found" });
+            return;
+        }
         await thought.save();
         res.json(thought);
     }
